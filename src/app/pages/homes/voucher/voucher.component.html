@@ -1,0 +1,55 @@
+<app-header></app-header>
+<div class="prd1-cont container-fluid">
+    <div class="row" > 
+        <div class="main-cart-left col-lg-12">
+
+            <div class="col-lg-12 title-1">MÃ GIẢM GIÁ CHO ĐƠN HÀNG</div>
+
+            <div class="row prd1-right-items">
+                <div class="col-lg-4 item" *ngFor="let voucher of vouchers"  > <!--ngFor-->
+                        <div class="coupon"> 
+                            <div class="row"> 
+                                <div class="col-lg-4 prd1-left"> 
+                                    <div class="voucher-left" style="padding-top: 10px; padding-right: 15px;">
+                                        <div class="img-item">
+                                            <img src="../../../../assets/img/just-carrot.svg" alt="Image" style="width: 130px; height: auto;">
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row left-type">
+                                    <ul class="nav nav-tabs-voucher" role="tablist">
+                                        <li style="padding: 1px;" class="type-divider"></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-8 prd1-right"> 
+                                    <div> 
+                                        <div class="flex-row " style="margin-top: 10px;">
+                                            <span>Giảm</span> 
+                                            <h1 style="margin-bottom: 0%;">{{voucher.phanTram}}%</h1>
+                                        </div> 
+                                        <div class="flex-row "> 
+                                            <span>Trên mọi hóa đơn</span>
+                                        </div>
+                                        <br>
+                                        <div class="flex-row">
+                                            <span class="macode">Mã:</span>
+                                            <h3 class="border-success px-3 code">{{voucher.code}}</h3>
+                                        </div> 
+                                        <div class="flex-row" style="justify-content: right; margin-right: 20px;">
+                                            <span>Chỉ còn: <strong>{{voucher.soLuong! - voucher.daDung!}}</strong> lượt</span>
+                                        </div>
+                                    </div> 
+                                </div> 
+
+                            </div> 
+                        </div>
+                </div>
+            </div>
+            <mat-paginator [length]="totalRecords" [pageSize]="pageSize" [pageIndex]="page - 1" 
+            (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
+

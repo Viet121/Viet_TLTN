@@ -1,0 +1,78 @@
+<app-header></app-header>
+<div class="prd1-cont container-fluid" style="display: flex; justify-content: center;">
+    <div class="row" > 
+        <div class="row-cart">
+            <div class="main-cart-left col-lg-8">
+                <div class="col-lg-12 title-1">LỊCH SỬ ĐƠN HÀNG</div> 
+                <div class="allCart">
+                    <div *ngFor="let hoaDon of hoaDons" class="product-info" > <!--ngFor-->
+                        <div class="col-lg-9 item-2">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading">Mã đơn hàng: {{hoaDon.maHD}}</h4>
+                                    <h5 class="price"> 
+                                        <span class="saleoff"><strong>Tình trạng: <span style="color: black;">{{ getTinhTrang(hoaDon.tinhTrang!) }}</span></strong></span>
+                                    </h5>
+                                    <h5 class="price"> 
+                                        <span class="saleoff"><strong>Ngày đặt đơn: {{hoaDon.thoiGian| date:'dd/MM/yyyy'}}</strong></span>
+                                    </h5>
+                                    <h5 class="quatity">
+                                        <span style="padding-right: 20px;" class="saleoff"><strong>Tên: {{hoaDon.hoTen}}  </strong></span>  
+                                        <span>-</span>
+                                        <span style="padding-left: 20px;"class="saleoff"><strong>Sdt: {{hoaDon.sdt}}</strong></span> 
+                                    </h5>
+                                    <h5 class="quatity">
+                                        <span class="saleoff"><strong>Địa chỉ: {{hoaDon.diaChi}}</strong></span> 
+                                    </h5>
+                                    <h5 class="size">
+                                        <span class="saleoff"><strong>Tổng tiền: {{hoaDon.tamTinh| number: '4.0'}} VND</strong></span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 item-2-1">
+                            <div style="padding-top: 200px ;">
+                                <a [routerLink]="['/detail-user', hoaDon.maHD]">
+                                    Chi tiết ...
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="divider-1"></div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-lg-12">
+                    <mat-paginator [length]="totalRecords" [pageSize]="pageSize" [pageIndex]="page - 1" 
+                    (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
+                </div>
+            </div>
+            <!-- MatPaginator -->
+            
+            <div class="col-lg-4 main-cart-right">
+                <ul class="list-group">
+                    <li class="list-group-item title">LỜI CẢM ƠN</li>
+                    <li class="list-group-item divider"></li>
+                    <li class="list-group-item title-1">GỬI ĐẾN BẠN</li>
+                    <li class="list-group-item text-1">
+                        <span class="title-3">Cảm ơn bạn đã tin tưởng<br>và chọn mua sản phẩm của bên mình</span>
+                    </li>
+                    <li class="list-group-item text-2">
+                        <span class="title-3">Bên mình hy vọng rằng<br>sản phẩm sẽ có được sự<br>hài lòng từ bạn và mang lại cho bạn những trải nghiệm tuyệt vời</span>
+                    </li>
+                    <li class="list-group-item text-2">
+                        <span class="title-3">Rất mong tiếp tục nhận được<br>sự ủng hộ của bạn trong tương lai</span>
+                    </li>
+                    <li class="list-group-item divider-1"></li>
+                    <li class="list-group-item">
+                        <span class="title-5">HẸN GẶP LẠI BẠN</span>
+                    </li>
+                    
+                </ul> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
+

@@ -1,0 +1,107 @@
+<div mat-dialog-title>
+    <h1>Sửa Sản Phẩm</h1>
+</div>
+<form [formGroup]="updateProduct" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content-notification">
+        <div class="row">
+            <mat-form-field appearance="outline" class="content-full-width">
+                <mat-label>Tên sản phẩm</mat-label>
+                <input matInput type="text" formControlName="tenSP" [(ngModel)]="productDetails.tenSP">
+            </mat-form-field>
+        </div>
+        <div class="row"> 
+            <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Giới tính</mat-label>
+              <mat-select formControlName="gioiTinh" [(ngModel)]="productDetails.gioiTinh">
+                <mat-option value="Nam">Nam</mat-option>
+                <mat-option value="Nữ">Nữ</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Trạng thái</mat-label>
+              <mat-select formControlName="trangThai" [(ngModel)]="productDetails.trangThai">
+                <mat-option value="limited-edition">Limited Edition</mat-option>
+                <mat-option value="online-only">Online Only</mat-option>
+                <mat-option value="sale-off">Sale off</mat-option>
+                <mat-option value="new-arrival">New Arrival</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Kiểu dáng</mat-label>
+              <mat-select formControlName="kieuDang" [(ngModel)]="productDetails.kieuDang">
+                <mat-option value="low-top">Low Top</mat-option>
+                <mat-option value="hight-top">High Top</mat-option>
+                <mat-option value="slip-on">Slip-on</mat-option>
+                <mat-option value="mid-top">Mid Top</mat-option>
+                <mat-option value="mule">Mule</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Chất liệu</mat-label>
+              <mat-select formControlName="chatLieu" [(ngModel)]="productDetails.chatLieu">
+                <mat-option value="canvas">Canvas</mat-option>
+                <mat-option value="suede-dalon">Suede | Da lộn</mat-option>
+                <mat-option value="leather-da">Leather | Da</mat-option>
+                <mat-option value="cotton">Cotton</mat-option>
+                <mat-option value="taslan">Taslan</mat-option>
+                <mat-option value="knit">Knit</mat-option>
+                <mat-option value="ripstop">Ripstop</mat-option>
+                <mat-option value="single-jerey">Single Jerey</mat-option>
+                <mat-option value="flannel">Flannel</mat-option>
+                <mat-option value="acrylic">Acrylic</mat-option>
+                <mat-option value="corduroy">Corduroy</mat-option>
+                <mat-option value="polyester">Polyester</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Giá</mat-label>
+              <input matInput type="number" min="1" formControlName="giaSP" [(ngModel)]="productDetails.giaSP">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Size 38</mat-label>
+              <input matInput type="number" min="0" formControlName="soLuong38" [(ngModel)]="productDetails.soLuong38">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="content-full-width">
+            <mat-label>Size 39</mat-label>
+            <input matInput type="number" min="0" formControlName="soLuong39" [(ngModel)]="productDetails.soLuong39">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Size 40</mat-label>
+              <input matInput type="number" min="0" formControlName="soLuong40" [(ngModel)]="productDetails.soLuong40">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="content-full-width">
+            <mat-label>Size 41</mat-label>
+            <input matInput type="number" min="0" formControlName="soLuong41" [(ngModel)]="productDetails.soLuong41">
+          </mat-form-field>
+        </div> 
+        <div class="row">
+          <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Size 42</mat-label>
+              <input matInput type="number" min="0" formControlName="soLuong42" [(ngModel)]="productDetails.soLuong42">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="content-full-width">
+            <mat-label>Size 43</mat-label>
+            <input matInput type="number" min="0" formControlName="soLuong43" [(ngModel)]="productDetails.soLuong43">
+          </mat-form-field>
+        </div>
+        <div class="row">
+            <span style="font-size: 10px; color: white ">*Lưu ý: Dòng này chủ yếu để kéo width của component này khi đc gọi dialog, tại chỉnh css 0 đc.</span>
+        </div>       
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Hủy</button>
+        <button mat-raised-button color="primary" type="submit">Lưu</button>
+    </div>
+</form>

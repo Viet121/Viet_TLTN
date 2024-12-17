@@ -1,0 +1,29 @@
+<div mat-dialog-title>
+    <h1>Thêm voucher</h1> 
+</div>
+<form [formGroup]="addProduct" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content-notification">
+        <div class="row">
+            <mat-form-field appearance="outline" class="content-full-width">
+                <mat-label>Mã giảm giá</mat-label>
+                <input matInput type="text" formControlName="code" [(ngModel)]="voucherDetail.code" readonly>
+            </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Số lượng</mat-label>
+              <input matInput type="number" min="1" formControlName="soLuong" [(ngModel)]="voucherDetail.soLuong">
+          </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline" class="content-full-width">
+                <mat-label>Phần trăm giảm</mat-label>
+                <input matInput type="number" min="1" formControlName="phanTram" [(ngModel)]="voucherDetail.phanTram">
+            </mat-form-field>
+        </div>       
+  </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Hủy</button>
+        <button mat-raised-button color="primary" type="submit">Lưu</button>
+    </div>
+</form>

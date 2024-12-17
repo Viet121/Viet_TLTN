@@ -1,0 +1,111 @@
+<div mat-dialog-title>
+    <h1>Thêm Sản Phẩm {{newMaSP}}</h1> 
+</div>
+<form [formGroup]="addProduct" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content-notification">
+        <div class="row">
+            <mat-form-field appearance="outline" class="content-full-width">
+                <mat-label>Tên sản phẩm</mat-label>
+                <input matInput type="text" formControlName="tenSP">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Giới tính</mat-label>
+              <mat-select formControlName="gioiTinh">
+                <mat-option value="nam">Nam</mat-option>
+                <mat-option value="nu">Nữ</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Trạng thái</mat-label>
+              <mat-select formControlName="trangThai">
+                <mat-option value="limited-edition">Limited Edition</mat-option>
+                <mat-option value="online-only">Online Only</mat-option>
+                <mat-option value="sale-off">Sale off</mat-option>
+                <mat-option value="new-arrival">New Arrival</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Kiểu dáng</mat-label>
+              <mat-select formControlName="kieuDang">
+                <mat-option value="low-top">Low Top</mat-option>
+                <mat-option value="hight-top">High Top</mat-option>
+                <mat-option value="slip-on">Slip-on</mat-option>
+                <mat-option value="mid-top">Mid Top</mat-option>
+                <mat-option value="mule">Mule</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Chất liệu</mat-label>
+              <mat-select formControlName="chatLieu">
+                <mat-option value="canvas">Canvas</mat-option>
+                <mat-option value="suede-dalon">Suede | Da lộn</mat-option>
+                <mat-option value="leather-da">Leather | Da</mat-option>
+                <mat-option value="cotton">Cotton</mat-option>
+                <mat-option value="taslan">Taslan</mat-option>
+                <mat-option value="knit">Knit</mat-option>
+                <mat-option value="ripstop">Ripstop</mat-option>
+                <mat-option value="single-jerey">Single Jerey</mat-option>
+                <mat-option value="flannel">Flannel</mat-option>
+                <mat-option value="acrylic">Acrylic</mat-option>
+                <mat-option value="corduroy">Corduroy</mat-option>
+                <mat-option value="polyester">Polyester</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Giá</mat-label>
+              <input matInput type="number" min="1" formControlName="giaSP">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Size 38</mat-label>
+              <input matInput type="number" min="1" formControlName="s38">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="content-full-width">
+            <mat-label>Size 39</mat-label>
+            <input matInput type="number" min="1" formControlName="s39">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Size 40</mat-label>
+              <input matInput type="number" min="1" formControlName="s40">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="content-full-width">
+            <mat-label>Size 41</mat-label>
+            <input matInput type="number" min="1" formControlName="s41">
+          </mat-form-field>
+        </div> 
+        <div class="row">
+          <mat-form-field appearance="outline" class="content-full-width">
+              <mat-label>Size 42</mat-label>
+              <input matInput type="number" min="1" formControlName="s42">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="content-full-width">
+            <mat-label>Size 43</mat-label>
+            <input matInput type="number" min="1" formControlName="s43">
+          </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-label style="margin-left: 20px;">Hình ảnh</mat-label>
+            <input type="file" (change)="uploadPhoto($event)" #fileInput  formControlName="image_URL">
+        </div>
+        <div class="row">
+            <span style="font-size: 10px; color: white ">*Lưu ý: Dòng này chủ yếu để kéo width của component này khi đc gọi dialog, tại chỉnh css 0 đc.</span>
+        </div>       
+  </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Hủy</button>
+        <button mat-raised-button color="primary" type="submit">Lưu</button>
+    </div>
+</form>

@@ -1,0 +1,63 @@
+<app-header></app-header>
+<div class="prd1-cont container-fluid">
+    <div class="row">
+        <div class="col-lg-3 prd1-left">
+            <app-dashboard-admin></app-dashboard-admin>
+        </div>
+        <div class="col-lg-9 prd1-right">
+           <div class="main-cart-left col-lg-12">
+                <div class="col-lg-12 title-1">MÃ GIẢM GIÁ CHO ĐƠN HÀNG</div>
+           </div>
+           <div class="row" style="justify-content: flex-end; padding-right: 20px;">
+              <a (click)="openAddProduct()"  class="btn btn-add-v"><i class="fa-solid fa-square-plus"></i></a>
+           </div>
+           <div style="color: aliceblue;">.</div>
+           <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" class="example-table" matSort>
+
+                <!-- Code Column -->
+                <ng-container matColumnDef="code">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
+                  <td mat-cell *matCellDef="let row">{{ row.code }}</td>
+                </ng-container>
+            
+                <!-- Số Lượng Column -->
+                <ng-container matColumnDef="soLuong">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Số Lượng</th>
+                  <td mat-cell *matCellDef="let row">{{ row.soLuong }}</td>
+                </ng-container>
+            
+                <!-- Đã Dùng Column -->
+                <ng-container matColumnDef="daDung">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Đã Dùng</th>
+                  <td mat-cell *matCellDef="let row">{{ row.daDung }}</td>
+                </ng-container>
+            
+                <!-- Phần Trăm Column -->
+                <ng-container matColumnDef="phanTram">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Phần Trăm (%)</th>
+                  <td mat-cell *matCellDef="let row">{{ row.phanTram }}%</td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef> Tùy Chọn </th>
+                  <td mat-cell *matCellDef="let row">
+                    <a (click)="openUpdateProduct(row.code)"  class="btn btn-edit-v"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <button type="button"  class="btn btn-delete-v" (click)="deleteVoucher(row.code)"><i class='fas fa-trash-alt delete'></i></button>
+                  </td>
+                </ng-container>
+                <!-- Header Row -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <!-- Data Row -->
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [length]="totalRecords" [pageSize]="pageSize" [pageIndex]="page - 1" 
+                (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
+           </div>
+        </div>
+        
+    </div>
+</div>
+
+<app-footer></app-footer>
+

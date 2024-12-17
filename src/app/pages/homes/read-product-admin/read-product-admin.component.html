@@ -1,0 +1,44 @@
+<app-header></app-header>
+<div class="prd-detail container-fluid">
+    <div class="row-read">
+        <div class="row left-divider"></div>
+        <div class="col-md-7">
+            <div class="wrapper-slide">
+                <div class="prd-detail-main-img">
+                    <img src={{sanphamDetails.image_URL}} alt="" class="main-img">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 prd-detail-right">
+            <h4>{{sanphamDetails.tenSP|uppercase}} - {{sanphamDetails.kieuDang|uppercase}}</h4>
+            <h6 class="detail1">
+                <span class="pull-left" >Mã sản phẩm: <strong>{{sanphamDetails.maSP}}</strong></span>
+            </h6>
+            <h5 class="detail1">
+                <span class="saleprice">{{sanphamDetails.giaSP| number: '4.0'}} VND</span>
+            </h5>
+            <div class="divider"></div>
+            <h6 class="detail1">
+                <span class="pull-left" >Đối tượng: <strong>{{sanphamDetails.gioiTinh|titlecase}}</strong></span>
+            </h6>
+            <h6 class="detail1">
+                <span class="pull-left" >Kiểu dáng: <strong>{{sanphamDetails.kieuDang|titlecase}}</strong></span>
+            </h6>
+            <h6 class="detail1">
+                <span class="pull-left" >Chất liệu: <strong>{{sanphamDetails.chatLieu|titlecase}}</strong></span>
+            </h6>
+            <div class="divider"></div>
+            <h6 class="detail1">
+                <span class="pull-left" >Số lượng đã bán: <strong>{{soLuongBan}}</strong></span>
+            </h6>
+            <h6 class="detail1">
+                <span class="pull-left" >Số lượng tồn kho: <strong>{{soLuongTonKho}}</strong></span>
+            </h6>
+            <div class="row grp-btn1">
+                <a href="javascript:void(0)" (click)="openUpdateProduct(sanphamDetails.maSP!)"class="btn btn-update" id="addProductToCart" data-ananas-validations="">Sửa</a>
+                <a href="javascript:void(0)" (click)="deleteSP(sanphamDetails.maSP!)" class="btn btn-delete" id="addProductToCart" data-ananas-validations="">Xóa</a>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,88 @@
+<app-header></app-header>
+<div class="main-cart container-fluid">
+    <div class="row-cart">
+        <div class="main-cart-left col-lg-8">
+            <div class="col-lg-12 title-1">GIỎ HÀNG</div>
+            <div class="allCart">
+                <div class="product-info" *ngFor="let giohang of gioHangs" > <!--ngFor-->
+                    <div class="col-lg-9 item-2">
+                        <div class="media">
+                            <div class="media-left">
+                                <a>
+                                    <img src={{giohang.image_URL}} class="media-object" alt="" height="283" width="283" data-holder-rendered="true">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading"> {{giohang.maSP}} / {{giohang.tenSP}} / {{giohang.kieuDang| titlecase}} / {{giohang.chatLieu| titlecase}}</h4>
+                                <h5 class="price"> 
+                                    <span class="saleoff"><strong>Giá:</strong> {{giohang.tongTien | number: '4.0'}} VND</span>
+                                </h5>
+                                <h5 class="size">
+                                    <span class="saleoff"><strong>Size:</strong> {{giohang.maSize}}</span>
+                                </h5>
+                                <h5 class="quatity">
+                                    <span class="saleoff"><strong>Số lượng:</strong> {{giohang.soLuong}}</span> 
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 item-2-1">
+                        <div class="price">
+                            {{
+                              (giohang.trangThai === 'Còn hàng' ? giohang.tongTien! * giohang.soLuong! :
+                              (giohang.trangThai === 'Hết hàng' ? giohang.tongTien! * 0 :
+                              giohang.tongTien! * giohang.soLuongKho!))
+                              | number: '4.0'
+                            }} VND
+                          </div>
+                        <div class="status">{{giohang.trangThai}}</div> 
+                        <div class="button" data-id="962345" data-size="40" data-no="1 " data-quantity="1" data-current-size="40">
+                            <button href="javascript:void(0)" class="btn btn-like addToWishList"><img src="../../../../assets/img/Heart.svg"></button>
+                            <button href="javascript:void(0)" (click)="deleteGH(giohang.maGH!)" class="btn btn-delete remove-product-in-cart" id="remove-product-in-cart"><img src="../../../../assets/img/Trash_bin.svg">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="divider-1"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 main-cart-right">
+            <ul class="list-group">
+                <li class="list-group-item title">ĐƠN HÀNG</li>
+                <li class="list-group-item divider"></li>
+                <li class="list-group-item title-1">NHẬP MÃ KHUYẾN MÃI</li>
+                <li class="list-group-item">
+                    <div class="input-group">
+                        <input type="text" [(ngModel)]="voucherCode" class="form-control-giamgia" value=""> 
+                        <span class="input-group-btn">
+                            <button class="btn btn-apply" (click)="onVoucher(voucherCode)" type="button">ÁP DỤNG</button>
+                        </span>
+                    </div>
+                </li>
+                <li class="list-group-item divider-1"></li>
+                <li class="list-group-item text-1">
+                    <span class="title-3">Đơn hàng</span>
+                    <span class="title-3-1 totalPriceOfCart">{{tongTienGio| number: '4.0'}} VND</span>
+                </li>
+                <li class="list-group-item text-2">
+                    <span class="title-3">Giảm</span>
+                    <span class="title-3-1 totalDiscountOfCart">{{tongTienGio*voucherPhanTram/100 | number: '4.0'}} VND</span>
+                </li>
+                <li class="list-group-item divider-1"></li>
+                <li class="list-group-item">
+                    <span class="title-5">TẠM TÍNH</span>
+                    <span class="title-5-1 tempPrice">{{tongTienGio - (tongTienGio*voucherPhanTram/100) | number: '4.0'}} VND</span>
+                </li>
+                <li class="list-group-item">
+                    <button (click)="goToShipping(voucherPhanTram)"  class="btn btn-cart to-checkout">
+                        TIẾP TỤC THANH TOÁN
+                    </button>
+                </li>
+            </ul> 
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

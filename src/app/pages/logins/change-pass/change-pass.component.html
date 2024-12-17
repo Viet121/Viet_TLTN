@@ -1,0 +1,35 @@
+<div class="coming-soon container-fluid">
+    <div class="row bg-full">
+        <div class="col-lg-12 coming-text">ĐẶT LẠI MẬT KHẨU</div>
+        <form [formGroup]="signupForm">
+        <div class="col-lg-12 input-email">
+            <!--Lay email tu trang truoc gan vo-->
+            <div class="input-field">
+                <i class="fa-solid fa-user"></i>
+                <input type="email" formControlName="email" placeholder="Email" [(ngModel)]="emailSignUp" readonly> 
+            </div>
+            
+            <small *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required','password')" class="text-danger">*Mật khẩu là bắt buộc</small>
+            <div class="input-field">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" formControlName="password" placeholder="Mật khẩu"> 
+            </div>
+            <small *ngIf="signupForm.controls['password2'].dirty && signupForm.hasError('required','password2')" class="text-danger">*Mật khẩu là bắt buộc</small>
+            <div class="input-field">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" formControlName="password2" placeholder="Xác nhận mật khẩu"> 
+            </div>
+        </div>
+        <div class="col-lg-12 button text-center">
+            <button (click)="onSignup()" type="submit" name="submit" class="btn btn-buy-cont">Đăng Ký</button>
+        </div>
+        <div *ngIf="!isAccount" class="col-lg-12 forgot-password">
+            <h5>Cảm ơn bạn vì đã thực hiện đến bước cuối cùng này!</h5>
+        </div>
+        <div *ngIf="isAccount" class="col-lg-12 forgot-password">
+            <h5>Đã có tài khoản? <a [routerLink]="['/login']" id="forgot" data-bs-toggle="modal" data-bs-target="#exampleModal" class="font-weight-bold"> Đăng nhập</a></h5>
+        </div>
+        </form>
+    </div>
+</div>
+

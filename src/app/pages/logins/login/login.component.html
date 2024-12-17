@@ -1,0 +1,31 @@
+
+<div class="coming-soon container-fluid">
+    <div class="row bg-full">
+        <div class="col-lg-12 coming-text">ĐĂNG NHẬP</div>
+        <form [formGroup]="loginForm">
+        <div class="col-lg-12 input-email">
+            <small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required','email')" class="text-danger">*Tài khoản là bắt buộc</small>
+            <div class="input-field">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" formControlName="email" placeholder="Email"> 
+            </div>
+            <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger">*Mật khẩu là bắt buộc</small>
+            <div class="input-field">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" formControlName="password" placeholder="Mật khẩu"> 
+            </div>
+            <div class="input-field2">
+                <a [routerLink]="['/forgot']" id="forgot" data-bs-toggle="modal" data-bs-target="#exampleModal" class="font-weight-bold">Quên mật khẩu?</a>
+            </div>
+        </div>
+
+        <div class="col-lg-12 button text-center">
+            <button (click)="onLogin()" type="submit" name="submit" class="btn btn-buy-cont">Đăng Nhập</button>
+        </div>
+        <div class="col-lg-12 forgot-password">
+            <h5>Chưa có tài khoản? <a [routerLink]="['/sign-up']"  id="forgot" data-bs-toggle="modal" data-bs-target="#exampleModal" class="font-weight-bold"> Đăng ký</a></h5>
+        </div>
+        </form>
+    </div>
+</div>
+

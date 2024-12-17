@@ -1,0 +1,54 @@
+<div class="row left-type">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" data-id="men,women" class="active">
+            <a href="javascript:void(0)" aria-controls="home" role="tab" data-togle="tab" aria-expanded="true">ADMIN</a>
+        </li>
+    </ul>
+</div>
+<div class="row left-divider"></div> 
+<div class="row left-tree">
+    
+    <ul class="nav" style="width: 100%;">
+        <li class="first-lvl">
+            <a [routerLink]="['/product']">
+                <label class="tree-toggle nav-header orange">
+                    SẢN PHẨM
+                </label> 
+            </a>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="first-lvl">
+            <a [routerLink]="['/voucher-admin']">
+                <label class="tree-toggle nav-header orange">
+                    VOUCHER
+                </label> 
+            </a>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="first-lvl">
+            <a [routerLink]="['/browse']">
+                <label class="tree-toggle nav-header orange">
+                    DUYỆT ĐƠN
+                </label> 
+            </a>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="first-lvl">
+            <a [routerLink]="['/approved']">
+                <label class="tree-toggle nav-header orange">
+                    ĐƠN DUYỆT
+                </label> 
+            </a>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="first-lvl">
+            <a [routerLink]="['/statistics']">
+                <label class="tree-toggle nav-header orange">
+                    THỐNG KÊ
+                </label> 
+            </a>
+        </li>
+        <li class="nav-divider"></li>
+    </ul>
+    
+</div>

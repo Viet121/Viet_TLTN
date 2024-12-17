@@ -1,0 +1,281 @@
+
+<div class="row left-type">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" data-id="men,women" class="active">
+            <a href="" aria-controls="home" role="tab" data-togle="tab" aria-expanded="true">TẤT CẢ</a>
+        </li>
+        <!---->
+        <li role="presentation" class="type-divider"></li>
+        <!---->
+        <li role="presentation" data-id="men">
+            <a href="" aria-controls="home" role="tab" data-togle="tab" aria-expanded="false">NAM</a>
+        </li>
+        <!---->
+        <li role="presentation" class="type-divider"></li>
+        <!---->
+        <li role="presentation" data-id="women">
+            <a href="" aria-controls="home" role="tab" data-togle="tab" aria-expanded="false">NỮ</a>
+        </li>
+    </ul>
+</div>
+<div class="row left-divider"></div>
+<div class="row left-type-item">
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="all">
+            <ul class="nav nav-stacked">
+                <li data-id="accessories">
+                    <a>
+                        Accessories | Phụ kiện
+                        <span class="glyphicon"></span>
+                    </a>
+                </li>
+                <li data-id="accessories">
+                    <a>
+                        Footwear | Lên chân
+                        <span class="glyphicon"></span>
+                    </a>
+                </li>
+                <li data-id="accessories">
+                    <a>
+                        Top | Nửa trên
+                        <span class="glyphicon"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row left-divider"></div>
+<div class="row left-tree">
+    <form (ngSubmit)="onSubmit()" style="width: 100%;">
+    <ul class="nav" style="width: 100%;">
+        <li class="first-lvl">
+            <!--Sau khi ngoi them tay tung mang thi nhan ra: Minh nen them bang du lieu gom ma("value") va ten("phan hien chu") roi select ra thi so luong cot va hang tuong ung cung tu co-->
+            <label [ngClass]="{ 'tree-toggle': true, 'nav-header': true, 'orange': treeArray[0] }" (click)="toggleLabelColor(0)">
+                TRẠNG THÁI
+                <span class="caret" [ngClass]="{ 'caret-active': treeArray[0], 'caret-normal': !treeArray[0] }"></span>
+            </label>
+            <ul class="nav tree" [style.display]="treeArray[0] ? 'block' : 'none'">
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[0][0] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(0,0)" value="limited-edition" hidden>
+                        Limited Edition
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[0][1] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(0,1)" value="online-only" hidden>
+                        Online Only
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[0][2] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(0,2)" value="sale-off" hidden>
+                        Sale off
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[0][3] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(0,3)" value="new-arrival" hidden>
+                        New Arrival
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="first-lvl">
+            <label [ngClass]="{ 'tree-toggle': true, 'nav-header': true, 'orange': treeArray[1] }" (click)="toggleLabelColor(1)">
+                KIỂU DÁNG
+                <span class="caret" [ngClass]="{ 'caret-active': treeArray[1], 'caret-normal': !treeArray[1] }"></span>
+            </label>
+            <ul class="nav tree" [style.display]="treeArray[1] ? 'block' : 'none'">
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[1][0] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(1,0)" value="low-top" hidden>
+                        Low Top
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[1][1] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(1,1)" value="hight-top" hidden>
+                        Hight Top
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[1][2] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(1,2)" value="slip-on" hidden>
+                        Slip-on
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[1][3] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(1,3)" value="mid-top" hidden>
+                        Mid Top
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[1][4] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(1,4)" value="mule" hidden>
+                        Mule
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="first-lvl">
+            <label [ngClass]="{ 'tree-toggle': true, 'nav-header': true, 'orange': treeArray[2] }" (click)="toggleLabelColor(2)">
+                GIÁ
+                <span class="caret" [ngClass]="{ 'caret-active': treeArray[2], 'caret-normal': !treeArray[2] }"></span>
+            </label>
+            <ul class="nav tree" [style.display]="treeArray[2] ? 'block' : 'none'">
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[2][0] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(2,0)" value="> 600" hidden>
+                        > 600k
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[2][1] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(2,1)" value="BETWEEN 500 AND 599" hidden>
+                        500k - 599k
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[2][2] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(2,2)" value="BETWEEN 400 AND 499" hidden>
+                        400k - 499k
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[2][3] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(2,3)" value="BETWEEN 300 AND 399" hidden>
+                        300k - 399k
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[2][4] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(2,4)" value="BETWEEN 200 AND 299" hidden>
+                        200k - 299k
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[2][5] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(2,5)" value= "< 200" hidden>
+                        < 200k
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="first-lvl">
+            <label [ngClass]="{ 'tree-toggle': true, 'nav-header': true, 'orange': treeArray[3] }" (click)="toggleLabelColor(3)">
+                CHẤT LIỆU
+                <span class="caret" [ngClass]="{ 'caret-active': treeArray[3], 'caret-normal': !treeArray[3] }"></span>
+            </label>
+            <ul class="nav tree" [style.display]="treeArray[3] ? 'block' : 'none'">
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][0] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,0)" value="canvas" hidden>
+                        Canvas
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][1] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,1)" value="suede-dalon" hidden>
+                        Suede | Da lộn
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][2] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,2)" value="leather-da" hidden>
+                        Leather | Da
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][3] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,3)" value="cotton" hidden>
+                        Cotton
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][4] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,4)" value="taslan" hidden>
+                        Taslan
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][5] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,5)" value="knit" hidden>
+                        Knit
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][6] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,6)" value="ripstop" hidden>
+                        Ripstop
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][7] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,7)" value="single-jerey" hidden>
+                        Single Jerey
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][8] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,8)" value="flannel" hidden>
+                        Flannel
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][9] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,9)" value="acrylic" hidden>
+                        Acrylic
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][10] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,10)" value="corduroy" hidden>
+                        Corduroy
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+                <li>
+                    <label [ngClass]="{'cb-checked': labelTreeArray[3][11] }">
+                        <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(3,11)" value="polyester" hidden>
+                        Polyester
+                        <span class="glyphicon"></span>
+                    </label>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-divider"></li>
+    </ul>
+    <button type="submit" class="btn btn-filter" style="margin-top: 15px;">Lọc sản phẩm</button> 
+    </form>
+</div>

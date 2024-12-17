@@ -1,0 +1,83 @@
+<app-header></app-header>
+<div class="main-cart container-fluid">
+    <div class="row-cart" style="display: flex; justify-content: center;">
+        <div class="main-cart-left col-lg-8">
+            <div class="col-lg-12 title-1">ĐƠN HÀNG {{maHDURL}}</div>
+            <div class="allCart">
+                <div class="product-info" *ngFor="let chiTiet of chiTietHDs" > <!--ngFor-->
+                    <div class="col-lg-9 item-2">
+                        <div class="media">
+                            <div class="media-left">
+                                <a>
+                                    <img src={{chiTiet.image_URL}} class="media-object" alt="" height="283" width="283" data-holder-rendered="true">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading"> {{chiTiet.maSP}} / {{chiTiet.tenSP}} / {{chiTiet.kieuDang| titlecase}} / {{chiTiet.chatLieu| titlecase}}</h4>
+                                <h5 class="price"> 
+                                    <span class="saleoff"><strong>Giá:</strong> {{chiTiet.giaSP| number: '4.0'}} VND</span>
+                                </h5>
+                                <h5 class="size">
+                                    <span class="saleoff"><strong>Size:</strong> {{chiTiet.maSize}}</span>
+                                </h5>
+                                <h5 class="quatity">
+                                    <span class="saleoff"><strong>Số lượng:</strong>{{chiTiet.soLuong}}</span> 
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 item-2-1">
+                        <div class="price" style="padding-top: 150px ;">
+                            {{
+                              chiTiet.giaSP!*chiTiet.soLuong!
+                              | number: '4.0'
+                            }} VND
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="divider-1"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!--Du thoi gian thi them chuc nang nhan xet hoa don cung duoc
+        <div class="col-lg-4 main-cart-right" *ngIf="hoaDon.tinhTrang === 0">
+            <ul class="list-group">
+                <li class="list-group-item title">ĐƠN HÀNG {{hoaDon.maHD}}</li>
+                <li class="list-group-item divider"></li>
+                <li class="list-group-item text-1" style="padding-top: 20px ;">
+                    <span class="title-3">{{hoaDon.hoTen}} - {{hoaDon.sdt}}</span>
+                </li>   
+                <li class="list-group-item divider-1"></li>
+                <li class="list-group-item title-1">ĐƠN HÀNG BẤT THƯỜNG</li>
+                <li class="list-group-item text-1">
+                    <span class="title-3">Sđt, Địa chỉ ảo</span>
+                </li>
+                <li class="list-group-item text-2">
+                    <span class="title-3">Liên hệ khách hàng không được trong 3 ngày (2 lần/ngày)</span>
+                </li>
+                <li class="list-group-item">
+                    <div class="input-group">
+                        
+                        <span class="input-group-btn">
+                            <button (click)="updateTinhTrang(hoaDon.maHD!, 5)" class="btn btn-apply" type="button">HỦY ĐƠN</button>
+                        </span>
+                    </div>
+                </li>
+                <li class="list-group-item divider-1"></li>
+                <li class="list-group-item">
+                    <span class="title-5">TỔNG ĐƠN</span>
+                    <span class="title-5-1 tempPrice">{{hoaDon.tongTien| number: '4.0'}} VND</span>
+                </li>
+                <li class="list-group-item">
+                    <button (click)="updateTinhTrang(hoaDon.maHD!, 1)" class="btn btn-cart to-checkout">
+                        DUYỆT ĐƠN HÀNG
+                    </button>
+                </li>
+            </ul> 
+        </div>
+        -->
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,133 @@
+<app-header></app-header>
+<div class="main-cart container-fluid">
+    <div class="row-infor">
+        <div class="col-lg-7 main-cart-left">
+            <div class="row-infor">
+                <form id="orderForm" [formGroup]="addInfor" >
+                    <div class="col-lg-12 title-1">THÔNG TIN GIAO HÀNG</div> 
+                    <div class="col-lg-10 form-group">
+                        <small *ngIf="addInfor.controls['hoTen'].dirty && addInfor.hasError('required','hoTen')" class="text-danger2">*Tên là bắt buộc</small>
+                        <div class="has-feedback">
+                            <input type="text" class="form-control" id="inputSuccess2" formControlName="hoTen" placeholder="Họ tên">
+                        </div>
+                    </div>
+                    <div class="col-lg-10 form-group">
+                        <small *ngIf="addInfor.controls['sdt'].dirty && addInfor.hasError('required','sdt')" class="text-danger2">*Sdt là bắt buộc</small>
+                        <div class="has-feedback">
+                            <input type="text" class="form-control" id="inputSuccess2" formControlName="sdt" placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="col-lg-10 form-group">
+                        <small *ngIf="addInfor.controls['email'].dirty && addInfor.hasError('required','email')" class="text-danger2">*Email là bắt buộc</small>
+                        <div class="has-feedback">
+                            <input type="text" class="form-control" id="inputSuccess2" formControlName="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-lg-10 form-group"> 
+                        <div class="col-md-6" style="padding-left: 0px ;">
+                            <select id="province" formControlName="province" class="form-control">
+                                <option value="" disabled selected>Chọn tỉnh/thành phố</option>
+                                <option *ngFor="let province of provinces" [value]="province.code">
+                                    {{ province.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select id="district" formControlName="district" class="form-control">
+                                <option value="" disabled selected>Chọn quận/huyện</option>
+                                <option *ngFor="let district of districts" [value]="district.code">
+                                    {{ district.name }}
+                                </option>
+                            </select>
+                        </div>    
+                    </div>
+                    
+                    <div class="col-lg-10 form-group">
+                        <!-- Chọn Phường/Xã -->
+                        <div class="col-md-6" style="padding-left: 0px ;">
+                            <select id="ward" formControlName="ward" class="form-control">
+                                <option value="" disabled selected>Chọn phường/xã</option>
+                                <option *ngFor="let ward of wards" [value]="ward.code">
+                                    {{ ward.name }}
+                                </option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <small *ngIf="addInfor.controls['soNha'].dirty && addInfor.hasError('required','soNha')" class="text-danger2">*Địa chỉchỉ là bắt buộc</small>
+                            <div class="has-feedback">
+                                <input type="text" class="form-control" id="soNha" formControlName="soNha" placeholder="Nhập tên đường,địa chỉ giao">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 title-1">PHƯƠNG THỨC GIAO HÀNG</div>
+                    <div class="col-lg-10 form-group">
+                        <div class="ck1">
+                            Tốc độ tiêu chuẩn (từ 2 - 5 ngày làm việc) 
+                        </div>
+                    </div>
+                    <div class="col-lg-12 title-1">PHƯƠNG THỨC THANH TOÁN</div>
+                    <div class="col-lg-10 form-group">
+                        <div class="ck1">
+                            Thanh toán trực tiếp khi giao hàng  
+                            &nbsp; &nbsp; 
+                            <img src="../../../../assets/img/icon_COD.svg">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-5 main-cart-right">
+            <ul class="list-group">
+                <li class="list-group-item title">ĐƠN HÀNG</li>
+                <li class="list-group-item divider"></li>
+                <div class="informationSP" *ngIf="tongTienGio <= 0">
+                    <li class="list-group-item text-1">
+                        <span class="title-4">Hiện không có sản phẩm trong hóa đơn này!</span>
+                        <span class="title-3-1 totalPriceOfCart">Vui lòng thêm sản phẩm vào giỏ hàng rồi tiếp tục thanh toán!</span>
+                        <span class="title-4">*Lưu ý:</span>
+                        <span class="title-3-1 totalPriceOfCart">- Với những sản phẩm thông báo hết hàng ở bên giỏ hàng thì sẽ không có sản phẩm trong hóa đơn!</span>
+                        <span class="title-3-1 totalPriceOfCart">- Nếu muốn đặt những sản phẩm ấy, quý khách vui lòng đợi bên mình cập nhật lại kho khi có hàng.</span>
+                        <span class="title-4">Cảm ơn quý khách!</span>
+                    </li>
+                </div>
+                <div class="informationSP" *ngFor="let giohang of gioHangs">
+                    <li class="list-group-item text-1">
+                        <span class="title-4">{{giohang.maSP}} - {{giohang.tenSP}}</span>
+                        <span class="title-3-1 totalPriceOfCart">{{giohang.tongTien | number: '4.0'}} VND</span>
+                    </li>
+                    <li class="list-group-item text-1">
+                        <span class="title-3">Size: {{giohang.maSize}}</span>
+                        <span class="title-3-1 totalPriceOfCart">x {{giohang.soLuongDapUng}}</span>
+                    </li>
+                </div>
+                <li class="list-group-item divider-1"></li>
+                <li class="list-group-item text-1">
+                    <span class="title-3">Đơn hàng</span>
+                    <span class="title-3-1 totalPriceOfCart">{{tongTienGio| number: '4.0'}} VND</span>
+                </li>
+                <li class="list-group-item text-1">
+                    <span class="title-3">Giảm</span>
+                    <span class="title-3-1 totalPriceOfCart">{{tongTienGio*voucherPhanTram/100 | number: '4.0'}} VND</span>
+                </li>
+                <li class="list-group-item text-1">
+                    <span class="title-3">Phí vận chuyển</span>
+                    <span class="title-3-1 totalPriceOfCart">0 VND</span>
+                </li>
+                <li class="list-group-item divider-1"></li>
+                <li class="list-group-item">
+                    <span class="title-5">TỔNG CỘNG</span>
+                    <span class="title-5-1 tempPrice">{{tongTienGio - (tongTienGio*voucherPhanTram/100) | number: '4.0'}} VND</span>
+                </li>
+                <li class="list-group-item">
+                    <small *ngIf="(tongTienGio <= 0)" class="text-danger2">*Không thể hoàn tất đặt hàng vì không có sản phẩm</small>  
+                    <button (click)="addInformation()"
+                            class="btn btn-cart to-checkout"
+                            [disabled]="tongTienGio <= 0"> HOÀN TẤT ĐẶT HÀNG
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

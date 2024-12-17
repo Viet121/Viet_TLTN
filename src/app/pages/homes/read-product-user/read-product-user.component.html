@@ -1,0 +1,69 @@
+<app-header></app-header>
+<div class="prd-detail container-fluid">
+    <div class="row-read">
+        <div class="row left-divider"></div>
+        <div class="col-md-7">
+            <div class="wrapper-slide">
+                <div class="prd-detail-main-img">
+                    <img src={{sanphamDetails.image_URL}} alt="" class="main-img">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 prd-detail-right">
+            <h4>{{sanphamDetails.tenSP|uppercase}} - {{sanphamDetails.kieuDang|uppercase}}</h4>
+            <h6 class="detail1">
+                <span class="pull-left" >Mã sản phẩm: <strong>{{sanphamDetails.maSP}}</strong></span>
+            </h6>
+            <h5 class="detail1">
+                <span class="saleprice">{{sanphamDetails.giaSP| number: '4.0'}} VND</span>
+            </h5>
+            <div class="divider"></div>
+            <h6 class="detail1">
+                <span class="pull-left" >Đối tượng: <strong>{{sanphamDetails.gioiTinh|titlecase}}</strong></span>
+            </h6>
+            <h6 class="detail1">
+                <span class="pull-left" >Kiểu dáng: <strong>{{sanphamDetails.kieuDang|titlecase}}</strong></span>
+            </h6>
+            <h6 class="detail1">
+                <span class="pull-left" >Chất liệu: <strong>{{sanphamDetails.chatLieu|titlecase}}</strong></span>
+            </h6>
+            <div class="divider"></div>
+            <h6 class="detail1">
+                <span class="pull-left" >Số lượng đã bán: <strong>{{soLuongBan}}</strong></span>
+            </h6>
+            <div class="divider"></div>
+
+            <div class="row-size-soluong">
+                <form [formGroup]="updateProduct">
+                    <div class="col-md-6">
+                      <h5>SIZE</h5>
+                      <mat-form-field appearance="outline">
+                        <mat-select formControlName="size" (selectionChange)="onSizeChange(maSP2)"> <!-- Thêm sự kiện selectionChange -->
+                          <mat-option *ngFor="let size of sizes" [value]="size">{{size}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <h5>SỐ LƯỢNG</h5>
+                      <mat-form-field appearance="outline" class="content-full-width">
+                        <input matInput type="number" min="1" formControlName="soLuong" (keypress)="preventNegative($event)"> 
+                        <mat-hint align="end" *ngIf="updateProduct.get('soLuong')?.errors?.['max']">
+                            Chỉ còn: {{ updateProduct.get('soLuong')?.errors?.['max'].max }} đôi
+                        </mat-hint> <!-- Hiển thị thông báo khi vượt quá số lượng -->
+                      </mat-form-field> 
+                    </div>
+                  </form>
+            </div>
+            <!-- dirty là đã tương tác với trường đó chưa -->
+            <small *ngIf="(updateProduct.controls['size'].dirty && updateProduct.hasError('required','size')||(updateProduct.controls['soLuong'].dirty && updateProduct.hasError('required','soLuong'))||(updateProduct.controls['soLuong'].dirty && updateProduct.get('soLuong')?.value==0))" 
+                        class="text-danger2">*Vui lòng chọn size và số lượng phù hợp</small>
+            <small *ngIf="(checkKho)" class="text-danger2">*Sản phẩm còn lại không đủ đáp ứng số lượng hàng đã có trong giỏ và số lượng hàng bạn muốn thêm vào giỏ</small>
+            <div class="divider"></div>
+            <div class="row grp-btn1"> 
+                <a href="javascript:void(0)" (click)="addGioHang(maSP2 , sanphamDetails.giaSP!)" class="btn btn-update" id="addProductToCart" data-ananas-validations="">Thêm vào giỏ</a>
+                <a href="javascript:void(0)" (click)="addThanhToan(maSP2 , sanphamDetails.giaSP!)" class="btn btn-delete" id="addProductToCart" data-ananas-validations="">Thanh toán</a>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

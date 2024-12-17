@@ -1,0 +1,50 @@
+<app-header></app-header>
+<div class="prd1-cont container-fluid">
+    <div class="row">
+        <div class="col-lg-3 prd1-left" *ngIf="role !== 'admin'">
+            <app-dashboard></app-dashboard>
+        </div>
+        <div class="col-lg-3 prd1-left" *ngIf="role === 'admin'">
+            <app-dashboard-admin></app-dashboard-admin>
+        </div>
+        <div class="col-lg-9 prd1-right">
+            <div class="row prd1-right-box">
+                <img src="../../../../assets/img/freeship2.jpg" alt=""> 
+            </div>
+            <div class="row-btn-add" *ngIf="role === 'admin'"> 
+                <button (click)="openAddProduct()" type="button" class="btn-add-product"><i class="fas fa-plus-circle"></i></button>
+            </div> 
+            <div class="row prd1-right-items">
+                <div class="col-lg-4 item" *ngFor="let sanpham of sanphams">
+                    <div class="thumbnail">
+                        <div class="cont-item"> 
+                            <div *ngIf="sanpham.totalSoLuong == 0" class="soldout-text">HẾT HÀNG</div>
+                            <div *ngIf="sanpham.totalSoLuong == 0" class="black-rect"></div> 
+                            <a>
+                                <img src={{sanpham.image_URL}} alt="" class="inormal">
+                            </a>
+                        </div>
+                        <div class="button" >
+                            <a *ngIf="role === 'admin'" [routerLink]="['/read-product-admin', sanpham.maSP]" class="btn btn-prd1-buynow">Chi Tiết</a>
+                            <a *ngIf="role !== 'admin' && sanpham.totalSoLuong! > 0" [routerLink]="['/read-product-user', sanpham.maSP]" class="btn btn-prd1-buynow">Mua Ngay</a>
+                            <a class="btn btn-prd1-heart" data-like="" data-action="" data-product=""></a>
+                        </div>
+                        <div class="caption">
+                            <h3 class="name">
+                                <a>{{sanpham.maSP}} - {{sanpham.tenSP}}</a>
+                            </h3>
+                            <h3 class="color">{{sanpham.trangThai| titlecase}}</h3>
+                            <h3 class="price">{{sanpham.giaSP | number: '4.0'}} VND</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row prd1-left-paginator" >
+                <mat-paginator [length]="totalRecords" [pageSize]="pageSize" [pageIndex]="page - 1" 
+                (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

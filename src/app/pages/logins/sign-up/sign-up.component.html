@@ -1,0 +1,41 @@
+<div class="coming-soon container-fluid">
+    <div class="row bg-full"> 
+      <div class="col-lg-12 coming-text">ĐĂNG KÝ</div>
+        <form [formGroup]="codeForm">
+              
+            <div class="col-lg-12 input-email">
+                <small *ngIf="codeForm.controls['email'].dirty && codeForm.hasError('required','email')" class="text-danger">*Email là bắt buộc</small>
+                <div class="input-field">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="email" formControlName="email" placeholder="Email" [disabled]="codeForm.controls['email'].disabled">
+                </div>
+                <small *ngIf="isSend" class="text-danger">Mã code đang được gửi qua Gmail, vui lòng chờ trong giây lát!</small>
+                
+                <small *ngIf="codeForm.controls['code'].dirty && codeForm.hasError('required','code')" class="text-danger">*Mã code là bắt buộc</small>
+                <div *ngIf="isCodeInputVisible" class="input-field">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <input type="text" formControlName="code" placeholder="Mã code gồm 4 chữ số">
+                </div>
+                <small *ngIf="isCodeInputVisible" class="text-danger">Mã code đã được gửi qua Gmail, nếu không thấy bạn vui lòng kiểm tra trong hòm thư rác!</small>
+                
+            </div>
+            
+            <br>
+            <div class="col-lg-12 button text-center" *ngIf="!isCodeInputVisible">
+            <button (click)="onSignupEmail()" type="button" class="btn btn-buy-cont">Gửi Mã</button>
+            </div>
+            
+            <div class="col-lg-12 button text-center" *ngIf="isCodeInputVisible">
+            <button (click)="onSubmitCode()" type="button" class="btn btn-buy-cont">Xác Nhận</button>
+            </div>
+            <br>
+            <div class="col-lg-12 forgot-password">
+            <h5>Email được dùng để đăng nhập và sử dụng các dịch vụ của chúng tôi.</h5>
+            <br><br><br><br><br><br>
+            </div>
+            
+        </form>
+    </div>
+  </div>
+
+  
