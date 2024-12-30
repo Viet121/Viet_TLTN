@@ -1,0 +1,40 @@
+<h1 mat-dialog-title style="font-size: 1.5rem;"> <strong>TẠO TÀI KHOẢN NHÂN VIÊN</strong></h1>
+<mat-dialog-content class="mat-typography">
+    <form [formGroup]="signupForm">
+        <div class="col-lg-12 input-email">
+            <small *ngIf="signupForm.controls['name'].dirty && signupForm.hasError('required','name')" class="text-danger" style="color: red;">*Tên là bắt buộc</small>
+            <div class="input-field">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" formControlName="name" placeholder="Tên"> 
+            </div>
+            <small *ngIf="signupForm.controls['email'].dirty && signupForm.hasError('required','email')" class="text-danger"style="color: red;">*Email là bắt buộc</small>
+            <div class="input-field">
+                <i class="fa-solid fa-user"></i>
+                <input type="email" formControlName="email" placeholder="Email"> 
+            </div>
+            <small *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required','password')" class="text-danger"style="color: red;">*Mật khẩu là bắt buộc</small>
+            <div class="input-field">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" formControlName="password" placeholder="Mật khẩu"> 
+            </div>
+            <small *ngIf="signupForm.controls['password2'].dirty && signupForm.hasError('required','password2')" class="text-danger"style="color: red;" >*Mật khẩu là bắt buộc</small>
+            <div class="input-field">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" formControlName="password2" placeholder="Xác nhận mật khẩu"> 
+            </div>
+        </div>
+        </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end" style="padding-right: 50px;">
+    <button 
+        mat-button 
+        mat-dialog-close
+        class="cancel-button">Hủy</button>
+    <div style="padding-right: 50px;"></div>
+    <button 
+        mat-button  
+        class="continue-button"
+        (click)="onSignup()">
+        <strong style="color: white;">Tạo</strong>
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,42 @@
+/* Nút "Quay lại" */
+.cancel-button {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .cancel-button:hover {
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  
+  /* Nút "Tiếp tục" */
+  .continue-button {
+    background-color: #f15e2c;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .continue-button:hover {
+    background-color: #e04d1c;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .continue-button:disabled {
+    background-color: #ddd;
+    color: #aaa;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  

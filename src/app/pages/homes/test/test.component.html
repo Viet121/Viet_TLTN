@@ -1,0 +1,57 @@
+<h1 mat-dialog-title style="font-size: 1.5rem;"> <strong>Đánh giá sản phẩm {{data.tenSP}}</strong></h1>
+<mat-dialog-content class="mat-typography">
+    <div class="row" style="padding: 10px;">
+        <div *ngFor="let comment of CMTs; let i = index" class="comment">
+            <div class="comment-header">
+                <div class="username"> {{comment.name}}</div>
+                <div class="comment-time">{{comment.thoiGian| date:'M/d/yy, h:mm a'}}</div>
+            </div>
+            <div class="comment-body">
+                {{comment.noiDung}}
+            </div>
+            <div *ngIf="jrole =='admin'" class="comment-actions">
+                <span (click)="replyCmt(i)">Trả lời</span>
+            </div>
+            <div class="view-replies" [class.disabled]="comment.replyCount === 0" (click)="comment.replyCount! > 0 && loadReplies(comment.id!, i)">
+                Xem {{comment.replyCount}} phản hồi
+            </div>
+            <div class="replies">
+                <div *ngFor="let comments of CMTSs[i];" class="comment" [style.display]="cmtReply[i] ? 'block' : 'none'">
+                    <div class="comment-header">
+                        <div class="username">{{comments.name}}</div>
+                        <div class="comment-time">{{comments.thoiGian| date:'M/d/yy, h:mm a'}}</div>
+                    </div>
+                    <div class="comment-body">
+                        {{comments.noiDung}}
+                    </div>
+                    <div class="comment-actions">
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="jrole =='admin' ">
+                <form [formGroup]="addReply" (ngSubmit)="submitReply(comment.id!,i)">
+                    <small *ngIf="addReply.controls['noiDung'].dirty && addReply.hasError('required','noiDung')" class="text-danger2">*Bạn chưa nhập trả lời</small>
+                    <div class="comment-input" [style.display]="adReply[i] ? 'block' : 'none'">
+                        <textarea formControlName="noiDung" placeholder="Viết trả lời cho khách hàng..."></textarea>
+                        <button>Gửi trả lời</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <mat-paginator [length]="totalRecords" [pageSize]="pageSize" [pageIndex]="page - 1" 
+            (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
+        </div>
+    </div>
+</mat-dialog-content>
+<div style="padding: 10px;">
+    <form [formGroup]="addCMT" (ngSubmit)="submitCMT()">
+        <small *ngIf="addCMT.controls['noiDung'].dirty && addCMT.hasError('required','noiDung')" class="text-danger2">*Bạn chưa nhập đánh giá</small>
+        <div class="comment-input">
+            <textarea formControlName="noiDung" placeholder="Viết phản hồi, ý kiến, đánh giá về sản phẩm..."></textarea>
+            <button>Gửi đánh giá</button>
+        </div>
+    </form>
+</div>
+
+

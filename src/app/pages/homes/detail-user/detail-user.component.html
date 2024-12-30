@@ -26,8 +26,14 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="col-lg-3 item-2-1">
-                        <div class="price" style="padding-top: 150px ;">
+                        <div class="price" style="padding-top: 120px ;">
+                            <a [routerLink]="['/detail-user', chiTiet.maSP]" style="color: #34a853; font-size:medium;">
+                                Đánh giá ...
+                            </a>
+                        </div>
+                        <div class="price">
                             {{
                               chiTiet.giaSP!*chiTiet.soLuong!
                               | number: '4.0'

@@ -8,6 +8,8 @@ import { Voucher } from 'src/app/models/voucher';
 import { SanPhamService } from 'src/app/services/sanpham.service';
 import { CreateVoucherComponent } from '../create-voucher/create-voucher.component';
 import { UpdateVoucherComponent } from '../update-voucher/update-voucher.component';
+import Swal from 'sweetalert2';
+import { NgToastService } from 'ng-angular-popup';
 
 
 @Component({
@@ -26,7 +28,7 @@ export class VoucherAdminComponent implements OnInit{
   dataSource = new MatTableDataSource<Voucher>(); // Sử dụng MatTableDataSource để quản lý dữ liệu
   displayedColumns: string[] = ['code', 'soLuong', 'daDung', 'phanTram', 'actions'];
 
-  constructor(private voucherService: SanPhamService,private dialog: MatDialog) {}
+  constructor(private voucherService: SanPhamService,private dialog: MatDialog, private toast: NgToastService,) {}
 
   ngOnInit(): void {
     this.getVouchers();
@@ -68,16 +70,35 @@ export class VoucherAdminComponent implements OnInit{
       });
   }
 
-  deleteVoucher(code:string) {
-    const confirmation = window.confirm('Bạn có muốn xoá voucher này không !');
-    if (confirmation) {
-      // Nếu người dùng xác nhận xóa, thì thực hiện hàm delete
-      this.voucherService.deleteVoucher(code).subscribe({
-        next: (data) => {
-          this.getVouchers(); 
-        }
-      });
-    }
+  deleteVoucher(code:string){
+    Swal.fire({
+      title: "Xóa voucher này?",
+      text: "Bạn sẽ không thể hoàn tác nếu thực hiện!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Thực hiện xoá!",
+      cancelButtonText: "Hủy!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.voucherService.deleteVoucher(code) 
+        .subscribe({
+          next: (response) => {
+            Swal.fire({
+              title: "Thay đổi!",
+              text: "Bạn đã xóa thành công.",
+              icon: "success"
+            }).then((res) =>{
+              this.getVouchers();
+            });
+          },
+          error: (err) => {
+            this.toast.error({detail:"ERROR", summary:err?.error.message, duration: 5000});
+          }
+        });
+      }
+    });
   }
 
 }

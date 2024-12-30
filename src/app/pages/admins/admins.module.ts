@@ -26,6 +26,8 @@ import { CreateVoucherComponent } from './create-voucher/create-voucher.componen
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EmployeeComponent } from './employee/employee.component';
+import { CreateEmployeeComponent } from './create-employee/create-employee.component';
 
 
 
@@ -38,7 +40,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     DetailComponent,
     VoucherAdminComponent,
     UpdateVoucherComponent,
-    CreateVoucherComponent
+    CreateVoucherComponent,
+    EmployeeComponent,
+    CreateEmployeeComponent
   ],
   imports: [
     CommonModule,

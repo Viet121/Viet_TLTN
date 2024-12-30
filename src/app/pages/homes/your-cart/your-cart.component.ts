@@ -104,8 +104,12 @@ export class YourCartComponent implements OnInit{
               this.toast.error({detail:"ERROR", summary:"Số lượt sử dụng mã này đã hết", duration: 5000});
             }else{
               this.voucherPhanTram = this.voucherDetail.phanTram!;
-              this.toast.success({detail:"SUCCESS", summary:"Áp mã giảm thành công!", duration: 5000});
-              console.log('Phan tram giam ne may ma',this.voucherPhanTram);
+              this.gioHangService.autoVoucher(this.voucherDetail).subscribe({
+                next: (response) => {
+                  this.toast.success({detail:"SUCCESS", summary:"Áp mã giảm thành công!", duration: 5000});
+                  console.log('Phan tram giam ne may ma',this.voucherPhanTram);
+                }
+              });
             }
           }else{
             this.toast.error({detail:"ERROR", summary:"Mã giảm giá không tồn tại", duration: 5000});
@@ -116,6 +120,7 @@ export class YourCartComponent implements OnInit{
       this.toast.error({detail:"ERROR", summary:"Vui lòng nhập mã giảm giá", duration: 5000});
     }
   }
+
   goToShipping(phanTram: number) {
     this.router.navigate(['/shipping-information'], { queryParams: { voucherPhanTram: phanTram } });
   }

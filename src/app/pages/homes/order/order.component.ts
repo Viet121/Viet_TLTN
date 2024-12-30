@@ -4,25 +4,6 @@ import { Subject } from 'rxjs';
 import { HoaDon } from 'src/app/models/hoadon';
 import { SanPhamService } from 'src/app/services/sanpham.service';
 
-@Injectable()
-export class MyCustomPaginatorIntl implements MatPaginatorIntl {
-  changes = new Subject<void>();
-
-  // Các nhãn tùy chỉnh
-  firstPageLabel = 'Trang đầu';
-  itemsPerPageLabel = 'Mục mỗi trang:';
-  lastPageLabel = 'Trang cuối';
-  nextPageLabel = 'Trang tiếp';
-  previousPageLabel = 'Trang trước';
-
-  getRangeLabel(page: number, pageSize: number, length: number): string {
-    if (length === 0) {
-      return `Trang 1 của 1`;
-    }
-    const amountPages = Math.ceil(length / pageSize);
-    return `Trang ${page + 1} của ${amountPages}`;
-  }
-}
 
 @Component({
   selector: 'app-order',

@@ -7,6 +7,49 @@
                 <div class="prd-detail-main-img">
                     <img src={{sanphamDetails.image_URL}} alt="" class="main-img">
                 </div>
+                <div class="prd-detail-right">
+                    <h4>Đánh giá sản phẩm</h4>
+                </div>
+                <div class="view-replies" style="font-size: medium;" [class.disabled]="cmt.noiDung === ''" (click)="cmt.noiDung !== '' && openCMTs()">
+                    Xem thêm đánh giá...
+                </div>
+                <div class="comment" *ngIf="cmt.noiDung !== ''">
+                    <div class="comment-header">
+                        <div class="username"> {{cmt.name}}</div>
+                        <div class="comment-time">{{cmt.thoiGian| date:'M/d/yy, h:mm a'}}</div>
+                    </div>
+                    <div class="comment-body">
+                        {{cmt.noiDung}}
+                    </div>
+                    <div class="view-replies" [class.disabled]="cmt.replyCount === 0" (click)="cmt.replyCount! > 0 && loadReplies(cmt.id!)">
+                        Xem {{cmt.replyCount}} phản hồi
+                    </div>
+                    <div class="replies">
+                        <div *ngFor="let comments of CMTSs;" class="comment" [style.display]="cmtReply ? 'block' : 'none'">
+                            <div class="comment-header">
+                                <div class="username">{{comments.name}}</div>
+                                <div class="comment-time">{{comments.thoiGian| date:'M/d/yy, h:mm a'}}</div>
+                            </div>
+                            <div class="comment-body">
+                                {{comments.noiDung}}
+                            </div>
+                            <div class="comment-actions">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment" *ngIf="cmt.noiDung === ''">
+                    <div class="comment-body">
+                        Sản phẩm này chưa có đánh giá nào.
+                    </div>
+                </div>
+                <form [formGroup]="addCMT" (ngSubmit)="submitCMT()">
+                    <small *ngIf="addCMT.controls['noiDung'].dirty && addCMT.hasError('required','noiDung')" class="text-danger2">*Bạn chưa nhập đánh giá</small>
+                    <div class="comment-input">
+                        <textarea formControlName="noiDung" placeholder="Viết phản hồi, đánh giá, thắc mắc về sản phẩm..."></textarea>
+                        <button>Gửi đánh giá</button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-lg-5 prd-detail-right">

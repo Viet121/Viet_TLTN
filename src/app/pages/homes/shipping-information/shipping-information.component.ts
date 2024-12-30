@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { concatMap, from, Observable, of, tap } from 'rxjs';
@@ -8,6 +9,7 @@ import { GioHangSanPham } from 'src/app/models/giohangsanpham';
 import { HoaDon } from 'src/app/models/hoadon';
 import { SanPham } from 'src/app/models/sanpham';
 import { SanPhamService } from 'src/app/services/sanpham.service';
+import { ConfirmPaymentComponent } from '../confirm-payment/confirm-payment.component';
 
 @Component({
   selector: 'app-shipping-information',
@@ -74,7 +76,8 @@ export class ShippingInformationComponent implements OnInit{
     private fb: FormBuilder,
     private toast: NgToastService, 
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ){
     this.addInfor = this.fb.group({
       maHD: '',
@@ -88,7 +91,8 @@ export class ShippingInformationComponent implements OnInit{
       district: [{ value: '', disabled: true }], // Ban đầu disabled
       ward: [{ value: '', disabled: true }],    // Ban đầu disabled // phuong xa
       soNha: ['', Validators.required],
-      diaChi:''
+      diaChi:'',
+      thanhToan: 0,
     }); 
    }
 
@@ -126,7 +130,7 @@ export class ShippingInformationComponent implements OnInit{
         this.addInfor.get('district')?.disable();
         this.addInfor.get('ward')?.disable();
         this.districts = [];
-        this.wards = [];
+        this.wards = []; 
       }
     });
   }
@@ -149,7 +153,7 @@ export class ShippingInformationComponent implements OnInit{
     return this.gioHangService.getLocation(tp, qh, px).pipe(
       tap((data) => {
         // Cập nhật giá trị cho this.lct khi nhận được dữ liệu từ API
-        this.lct = `${data.province},${data.district},${data.ward}`;
+        this.lct = `${data.province}, ${data.district}, ${data.ward}`;
       })
     );
   }
@@ -202,7 +206,7 @@ export class ShippingInformationComponent implements OnInit{
   }
 
 
-  addCTHoaDon2(userId: number,maHD: string): void { // ham nay bi loi
+  addCTHoaDon2(userId: number,maHD: string): void { // ham nay bi loi bat dong bo, ko chạy theo tuan tu
     this.gioHangService.getGioHangWithProductInfo(userId)
       .subscribe(gioHangs => {
         this.gioHangs = gioHangs;
@@ -285,10 +289,15 @@ export class ShippingInformationComponent implements OnInit{
       })
     ).subscribe({
       next: () => {
-        this.router.navigate(['product']).then(() => {
-          this.gioHangService.triggerReload();
-          this.toast.success({ detail: "SUCCESS", summary: "Đặt hàng thành công! Cảm ơn quý khách", duration: 5000 });
-        });
+        if(this.hoaDon.thanhToan === 0){
+          this.router.navigate(['order']).then(() => {
+            this.gioHangService.triggerReload();
+            this.toast.success({ detail: "SUCCESS", summary: "Đặt hàng thành công! Cảm ơn quý khách", duration: 5000 });
+          });
+        }
+        else{
+          console.log('thanh toan pay');
+        }
       },
       error: (error) => {
         console.error("Lỗi xử lý đơn hàng:", error);
@@ -311,20 +320,24 @@ export class ShippingInformationComponent implements OnInit{
           this.hoaDon.hoTen = this.addInfor.value.hoTen;
           this.hoaDon.sdt = this.addInfor.value.sdt;
           this.hoaDon.email = this.addInfor.value.email;
-          this.hoaDon.diaChi = `${this.lct},${this.addInfor.value.soNha}`;
+          this.hoaDon.diaChi = `${this.lct}, ${this.addInfor.value.soNha}`;
           this.hoaDon.tinhTrang = 0;
-          this.hoaDon.thanhToan = 1; // Thanh toan COD là 1
+          this.hoaDon.thanhToan = this.addInfor.value.thanhToan; // Thanh toan COD la 0, PAY la 1
           this.hoaDon.tamTinh = this.tongTienGio - (this.tongTienGio * this.voucherPhanTram / 100); //tam tinh se giam neu co % giam
-          console.log(this.hoaDon);
           
-          // Tiến hành gửi yêu cầu addHoaDon nếu cần
-          /*
-          this.gioHangService.addHoaDon(this.hoaDon).subscribe({ 
-            next: (val: any) => {
-              this.addCTHoaDon(this.idUser,this.newMaHD); 
-          }  
-          });
-          */
+          // Tiến hành gửi yêu cầu addHoaDon 
+          if(this.hoaDon.thanhToan === 1){  // thanh toan bang phuong thuc VNPAY
+            this.openConfirm();
+          } else { // thanh toan bang phuong thuc COD
+            
+            this.gioHangService.addHoaDon(this.hoaDon).subscribe({ 
+              next: (val: any) => {
+                this.addCTHoaDon(this.idUser,this.newMaHD); 
+              }  
+            });
+            console.log('Thanh toan COD');
+          }
+          
         },
         error: (err) => {
           console.error('Error fetching location data:', err);
@@ -335,6 +348,55 @@ export class ShippingInformationComponent implements OnInit{
     }
   }
   
+  openConfirm() {
+    const dialogRef = this.dialog.open(ConfirmPaymentComponent);
   
+    dialogRef.afterClosed().subscribe({
+      next: (confirmed) => {
+        if (confirmed) {
+          // Chuẩn bị thông tin cho thanh toán
+          console.log('kiem tra hoa don: ', this.hoaDon);
+          // Thực hiện hàm addHoaDon trước
+          
+          this.gioHangService
+            .addHoaDon(this.hoaDon)
+            .pipe(
+              // Sau khi thêm hóa đơn thành công, thêm chi tiết hóa đơn
+              concatMap((hoaDonResponse: any) => {
+                this.addCTHoaDon(this.idUser, this.newMaHD);
+                const paymentRequest = {
+                  amount: this.hoaDon.tamTinh, // Tiền thanh toán
+                  orderId: this.hoaDon.maHD, 
+                  returnUrl: 'http://localhost:4200/vnpay-return',
+                  transactionReference: this.hoaDon.maHD,
+                  ipAddress: '127.0.0.1', // Lấy IP từ backend nếu cần
+                  locale: 'vn',
+                };
+                return this.gioHangService.createPayment(paymentRequest); // Tiếp tục tạo payment
+              })
+            )
+            .subscribe({
+              next: (response) => {
+                console.log('Service trả về:', response);
+                const paymentUrl = response.paymentUrl;
+                if (paymentUrl) {
+                  console.log('Chuyển hướng tới:', paymentUrl);
+                  window.location.href = paymentUrl; // Chuyển hướng tới VNPay
+                }
+              },
+              error: (err) => {
+                console.error('Error occurred:', err);
+              },
+            });
+        }
+      },
+    });
+  }
+  
+
+  onCheckboxChange(method: number): void {
+    const currentValue = this.addInfor.controls['thanhToan'].value;
+    this.addInfor.controls['thanhToan'].setValue(currentValue === method ? '' : method);
+  }
 
 } 

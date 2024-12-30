@@ -21,6 +21,10 @@ import { OrderComponent } from './order/order.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DetailUserComponent } from './detail-user/detail-user.component';
 import { VoucherComponent } from './voucher/voucher.component';
+import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { VnpayReturnComponent } from './vnpay-return/vnpay-return.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,9 @@ import { VoucherComponent } from './voucher/voucher.component';
     OrderComponent,
     DetailUserComponent,
     VoucherComponent,
+    ConfirmPaymentComponent,
+    VnpayReturnComponent,
+    TestComponent,
   ],
   imports: [
     CommonModule,
@@ -49,7 +56,8 @@ import { VoucherComponent } from './voucher/voucher.component';
     ReactiveFormsModule,
     MatSelectModule,
     NgxPaginationModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCheckboxModule,
   ]
 })
 export class HomesModule { }

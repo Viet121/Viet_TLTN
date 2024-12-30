@@ -16,6 +16,8 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import { Code } from '../models/code';
 import { LSDuyet } from '../models/lsduyet';
 import { Voucher } from '../models/voucher';
+import { CMT } from '../models/cmt';
+import { CMTS } from '../models/cmts';
 
 interface ProductCodeResponse {
     productCode: string;
@@ -166,6 +168,9 @@ export class SanPhamService {
     updatePass(updateRequest: UserForm):  Observable<UserForm>{
         return this.httpClient.put<UserForm>("https://localhost:7035/api/UserForms/Update", updateRequest);
     }
+    updateType(updateRequest: UserForm):  Observable<UserForm>{
+        return this.httpClient.put<UserForm>("https://localhost:7035/api/UserForms/UpdateType", updateRequest);
+    }
     setLoggedIn(email: string, role: string) {
         localStorage.setItem(this.userEmailKey, email);
         localStorage.setItem(this.userRoleKey, role);
@@ -259,8 +264,14 @@ export class SanPhamService {
     getID(email:string) : Observable<number>{
         return this.httpClient.get<number>("https://localhost:7035/api/UserForms/Get/"+email);
     }
+    getName(email: string): Observable<{ name: string }> {
+        return this.httpClient.get<{ name: string }>("https://localhost:7035/api/UserForms/GetName/" + email);
+    }
     getRoleUser(email: string): Observable<UserForm>{
         return this.httpClient.get<UserForm>("https://localhost:7035/api/UserForms/GetRole/" + email);
+    }
+    getJRolo(email: string): Observable<{ role: string }> {
+        return this.httpClient.get<{ role: string }>("https://localhost:7035/api/UserForms/GetJRole/" + email);
     }
     getSizesByProduct(maSP: string): Observable<number[]> {
         return this.httpClient.get<number[]>("https://localhost:7035/api/Khos/GetSizesByProduct/"+maSP);
@@ -371,11 +382,49 @@ export class SanPhamService {
     updateVoucher(updateProductRequest: Voucher):  Observable<Voucher>{
         return this.httpClient.put<Voucher>("https://localhost:7035/api/Vouchers/Update", updateProductRequest);
     }
+    autoVoucher(updateProductRequest: Voucher):  Observable<Voucher>{
+        return this.httpClient.put<Voucher>("https://localhost:7035/api/Vouchers/Auto", updateProductRequest);
+    }
     deleteVoucher(code: string):  Observable<Voucher> {
         return this.httpClient.delete<Voucher>("https://localhost:7035/api/Vouchers/Delete/" + code);
     }
     checkVoucher(code:string){
         return this.httpClient.post<any>("https://localhost:7035/api/Vouchers/CheckIfVoucherSL", code);
     }
-
+    createPayment(request: any): Observable<any> {
+        console.log(`https://localhost:7035/api/Payment/create-payment`, request);
+        return this.httpClient.post<any>(`https://localhost:7035/api/Payment/create-payment`, request);
+    }
+    validatePayment(request: any): Observable<any> {
+        let params = new HttpParams();
+        Object.keys(request).forEach((key) => {
+            params = params.set(key, request[key]);
+        });
+        return this.httpClient.get(`https://localhost:7035/api/Payment/vnpay-return`, {params});
+    }
+    updateTamTinh(maHD:string,tamTinh:number):Observable<any>{
+        const url = `https://localhost:7035/api/HoaDons/UpdateTamTinh/${maHD}/${tamTinh}`;
+        return this.httpClient.put<any>(url, {});
+    }
+    getCMT(maSP: string): Observable<CMT>{
+        return this.httpClient.get<CMT>("https://localhost:7035/api/CMTs/GetLatestCMT/"+ maSP);
+    }
+    addCMT(cmtRequest: CMT): Observable<CMT>{
+        return this.httpClient.post<CMT>("https://localhost:7035/api/CMTs/Insert", cmtRequest);
+    }
+    getCMTsPage(maSP: string, page: number, pageSize: number): Observable<any> {
+        return this.httpClient.get<any>("https://localhost:7035/api/CMTs/GetPagedCMT/"+maSP+"/"+page+"/"+pageSize);
+    }
+    getReplies(id: number): Observable<CMTS[]>{
+        return this.httpClient.get<CMTS[]>("https://localhost:7035/api/CMTSs/GetAllCMT/"+id);
+    }
+    addReply(cmtRequest: CMTS): Observable<CMTS>{
+        return this.httpClient.post<CMTS>("https://localhost:7035/api/CMTSs/Insert", cmtRequest);
+    }
+    importNhanVienData(nhanVienData: UserForm[]): Observable<any> {
+        return this.httpClient.post("https://localhost:7035/api/UserForms/import", nhanVienData);
+    }
+    getEmployeesPage(user_type: string, page: number, pageSize: number): Observable<any> {
+        return this.httpClient.get<any>("https://localhost:7035/api/UserForms/GetPagedEmployee/"+user_type+"/"+page+"/"+pageSize);
+    }
 } 

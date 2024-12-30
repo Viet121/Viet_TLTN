@@ -1798,7 +1798,7 @@ button, input, optgroup, select, textarea {
     right: 0;
 }
 
-.coupon{border-radius: 12px;box-shadow: 5px 8px 10px #f15e2c}
+.coupon{border-radius: 12px;box-shadow: 5px 8px 10px #f2b29d}
 
 .voucher-left {
     display: flex;
@@ -1866,11 +1866,20 @@ button, input, optgroup, select, textarea {
     font-size: 24px; /* Tăng kích thước icon */
     color: #28a745; /* Màu xanh lá */
     text-decoration: none; /* Loại bỏ gạch chân */
-  }
+}
   
-  .btn-add-v:hover {
+.btn-add-v:hover {
     color: #1e7e34; /* Màu xanh đậm hơn khi hover */
-  }
+}
+.btn-add-v1 {
+    font-size: 24px; /* Tăng kích thước icon */
+    color: #f15e2c; /* Màu xanh lá */
+    text-decoration: none; /* Loại bỏ gạch chân */
+}
+  
+.btn-add-v1:hover {
+    color: #d14f26; /* Màu xanh đậm hơn khi hover */
+}
   
   /* Chỉnh màu cho nút xóa */
 .btn-delete-v {
@@ -1880,5 +1889,107 @@ button, input, optgroup, select, textarea {
   
 .btn-delete-v:hover {
     color: #a71d2a; /* Màu đậm hơn khi hover */
+}
+.comment {
+    max-width: 600px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.comment-time {
+    font-size: 12px;
+    color: #999;
+    margin-left: 10px;
+}
+
+.comment-body {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.comment-actions {
+    font-size: 12px;
+    color: #007bff;
+    display: flex;
+    align-items: center;
+}
+
+.comment-actions span {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.comment-actions span:hover {
+    text-decoration: underline;
+}
+
+.replies {
+    margin-left: 20px;
+    border-left: 2px solid #ddd;
+    padding-left: 10px;
+}
+
+.view-replies {
+    font-size: 12px;
+    color: #007bff;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.view-replies.disabled {
+    pointer-events: none; /* Vô hiệu hóa sự kiện click */
+    opacity: 0.5;        /* Làm mờ để hiển thị trạng thái không khả dụng */
+    cursor: not-allowed; /* Hiển thị biểu tượng chuột "cấm" */
+}
+
+
+.view-replies:hover {
+    text-decoration: underline;
+}
+.comment-input {
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+.comment-input textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    resize: none;
+}
+
+.comment-input button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #f15e2c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-input button:hover {
+    background-color: #d14f26;
 }
   

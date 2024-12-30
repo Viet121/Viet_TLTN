@@ -3,10 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { CMT } from 'src/app/models/cmt';
+import { CMTS } from 'src/app/models/cmts';
 import { GioHang } from 'src/app/models/giohang';
 import { SanPham } from 'src/app/models/sanpham';
 import { InforService } from 'src/app/services/infor.service';
 import { SanPhamService } from 'src/app/services/sanpham.service';
+import { TestComponent } from '../test/test.component';
 
 @Component({
   selector: 'app-read-product-user',
@@ -15,6 +18,7 @@ import { SanPhamService } from 'src/app/services/sanpham.service';
 }) 
 export class ReadProductUserComponent implements OnInit {
   userEmail!: string;
+  userName!: string;
   maSP2!: string;
   gia2!: number;
   sizes: number[] = [];
@@ -44,6 +48,17 @@ export class ReadProductUserComponent implements OnInit {
     maSize: 0,
     tongTien: 0,
   }
+  addCMT: FormGroup;
+  cmtReply: boolean = false;
+  CMTSs: CMTS[] = [];
+  cmt: CMT = {
+    id: 0,
+    maSP: '',
+    name: '',
+    noiDung: '',
+    thoiGian: '2023-01-01',
+    replyCount: 0,
+  }
   constructor(private route: ActivatedRoute, private sanPhamService: SanPhamService,
     private router: Router,
     private dialog: MatDialog,
@@ -54,6 +69,13 @@ export class ReadProductUserComponent implements OnInit {
     this.updateProduct = this.fb.group({
       size: ['', Validators.required], 
       soLuong: ['', [Validators.required, Validators.min(1)]], 
+    });
+    this.addCMT = this.fb.group({
+      id: 0,
+      maSP: '',
+      name: '',
+      noiDung: ['', Validators.required],
+      thoiGian: '2023-01-01',
     });
   }
   ngOnInit(): void {
@@ -66,6 +88,7 @@ export class ReadProductUserComponent implements OnInit {
           this.getSizes(maSP);
           this.getTotalSoLuongBan(maSP);
           this.getEmailTK();
+          this.loadCMT();
         }
       }
     })
@@ -84,6 +107,69 @@ export class ReadProductUserComponent implements OnInit {
     if (event.key === '-' || event.key === 'e' || event.key === 'E') {
       event.preventDefault();
     } 
+  }
+
+  loadCMT(){
+    this.sanPhamService.getCMT(this.maSP2)
+    .subscribe(response => {
+      this.cmt = response;
+    });
+  }
+  loadReplies(id: number){
+    this.cmtReply = !this.cmtReply;
+    if (this.cmtReply == true) {
+      this.sanPhamService.getReplies(id).subscribe(
+          response => {
+              // Lưu dữ liệu phản hồi vào vị trí index trong CMTSs
+              this.CMTSs = response;
+          }
+      );
+    } else {
+      // Nếu trạng thái tắt (ẩn), xóa dữ liệu phản hồi tại vị trí index
+      this.CMTSs = [];
+    }
+  }
+  openCMTs(){
+    const dialogRef = this.dialog.open(TestComponent, {
+      data: { // Dữ liệu muốn truyền
+        email: this.userEmail,
+        maSP: this.maSP2,
+        tenSP: this.sanphamDetails.tenSP
+      },
+      disableClose: false,
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (val) => { 
+        this.loadCMT();
+      },
+    });
+  }
+  submitCMT(){
+    if(this.userEmail){
+      this.sanPhamService.getName(this.userEmail).subscribe({
+        next: (response) => {
+          this.userName = response.name;
+          console.log('test teenen',this.userName);
+          if (this.addCMT.valid){
+            this.addCMT.value.maSP = this.maSP2;
+            this.addCMT.value.name = this.userName;
+            this.addCMT.value.thoiGian = '2023-01-01';
+            this.sanPhamService.addCMT(this.addCMT.value).subscribe({
+              next: (val: any) => {
+                this.addCMT.reset();
+                this.loadCMT();
+                this.toast.success({detail:"SUCCESS", summary:"Thêm đánh giá thành công", duration: 5000});
+              }    
+            });
+          } else{
+            this.sanPhamService.validateAllFormFileds(this.addCMT);
+          }
+        } 
+      });
+    }
+    else{
+      this.toast.error({detail:"ERROR", summary:"Bạn cần đăng nhập để thực hiện chức năng này!", duration: 5000});
+    }
   }
   
   getTotalSoLuongBan(maSP: string): void {

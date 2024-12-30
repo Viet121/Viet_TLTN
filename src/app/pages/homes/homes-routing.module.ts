@@ -12,6 +12,9 @@ import { authGuard } from 'src/app/guards/auth.guard';
 import { OrderComponent } from './order/order.component';
 import { DetailUserComponent } from './detail-user/detail-user.component';
 import { VoucherComponent } from './voucher/voucher.component';
+import { ConfirmPaymentComponent } from './confirm-payment/confirm-payment.component';
+import { VnpayReturnComponent } from './vnpay-return/vnpay-return.component';
+import { TestComponent } from './test/test.component';
 
 
 const routes: Routes = [
@@ -26,6 +29,9 @@ const routes: Routes = [
   {path: 'order', component: OrderComponent},
   {path: 'detail-user/:maHD', component: DetailUserComponent},
   {path: 'voucher', component: VoucherComponent},
+  {path: 'confirm-payment', component: ConfirmPaymentComponent},
+  { path: 'vnpay-return', component: VnpayReturnComponent },
+  { path: 'test', component: TestComponent },
 ];
 
 @NgModule({

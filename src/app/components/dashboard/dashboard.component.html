@@ -55,7 +55,7 @@
                 TRẠNG THÁI
                 <span class="caret" [ngClass]="{ 'caret-active': treeArray[0], 'caret-normal': !treeArray[0] }"></span>
             </label>
-            <ul class="nav tree" [style.display]="treeArray[0] ? 'block' : 'none'">
+            <ul class="nav tree" [style.display]="treeArray[0] ? 'block' : 'none'"> 
                 <li>
                     <label [ngClass]="{'cb-checked': labelTreeArray[0][0] }">
                         <input name="cbStatus" class="cb-item" type="checkbox" (click)="toggleLabelChecked(0,0)" value="limited-edition" hidden>

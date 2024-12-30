@@ -1,0 +1,45 @@
+<h1 mat-dialog-title style="font-size: 1.5rem;"> <strong>ĐIỀU KHOẢN THANH TOÁN TRỰC TUYẾN</strong></h1>
+<mat-dialog-content class="mat-typography">
+    <h3>1. TRÁCH NHIỆM CỦA KHÁCH HÀNG</h3>
+    <p>- Kiểm tra cẩn thận thông tin và chi tiết đơn hàng trước khi thực hiện thanh toán.</p>
+    <p>- Đọc và hiểu rõ các chính sách giao hàng - đổi hàng/bảo hành, các chính sách khác liên quan đến việc mua hàng và thanh toán.</p>
+    <p>- Chắc chắn rằng thẻ của bạn đã được kích hoạt dịch vụ thanh toán trực tuyến bởi Ngân hàng phát hành thẻ.</p>
+    <p>- Cung cấp đầy đủ thông tin, đảm bảo việc bạn có quyền sử dụng thẻ tín dụng/ví điện tử đã nêu ở phần "Phương thức thanh toán".</p>
+    <p>- Thực hiện đúng hướng dẫn thanh toán theo khuyến cáo của Ngân hàng phát hành thẻ hoặc đơn vị cung ứng dịch vụ ví điện tử để đảm bảo an toàn trong giao dịch trực tuyến.</p>
+    <p>- Không đóng cửa sổ màn hình giao dịch cho đến khi nhận được kết quả giao dịch cuối cùng. Trong trường hợp giao dịch bị gián đoạn, liên hệ hotline của Ananas hoặc Ngân hàng phát hành thẻ/đơn vị cung ứng dịch vụ ví điện tử để kiểm tra tình trạng giao dịch.</p>
+    <p>- Lưu trữ các thông tin giao dịch, hóa đơn trực tuyến và các chứng từ liên quan đến giao dịch để làm căn cứ đối chiếu khi cần thiết.</p>
+    <p>- Liên hệ hotline 096 000 0000 hoặc inbox fanpage Carrot khi gặp phải các vấn đề phát sinh liên quan tới giao dịch.</p>
+    
+    <h3>2. TRÁCH NHIỆM CỦA CARROT</h3>
+
+    <p>- Tuân thủ các biện pháp đảm bảo an toàn, bảo mật thông tin thanh toán cá nhân của khách hàng theo quy định của pháp luật cũng như các quy định và các khuyến nghị về giám sát của Ngân hàng Nhà nước.</p>
+    <p>- Cung cấp đầy đủ thông tin về các chính sách giao hàng - đổi hàng/bảo hành, các chính sách khác liên quan đến việc mua hàng và thanh toán. Chính sách bán hàng trung thực, bán đúng giá trị đã thanh toán (bao gồm các khoản phí hợp lệ và thuế theo quy định của pháp luật).</p>
+    <p>- Cam kết hỗ trợ, tiếp nhận và giải quyết khiếu nại, xử lý các vấn đề phát sinh trong quá trình giao dịch.</p>
+    <p>- Hoàn trả kịp thời các khoản tiền khi yêu cầu hủy đơn hàng đó đáp ứng đúng hướng dẫn thay đổi hoặc hủy bỏ các giao dịch của Carrot.</p>
+
+</mat-dialog-content>
+<div  style="display: flex; align-items: center; padding-left: 30px ;">
+    <mat-checkbox
+        style="color: white;" 
+        [formControl]="hideRequiredControl" 
+        aria-labelledby="terms-label">
+    </mat-checkbox>
+    <span id="terms-label" style="color: black;">
+        TÔI ĐÃ HIỂU VÀ ĐỒNG Ý VỚI <strong style="color: #f15e2c;">NHỮNG ĐIỀU KHOẢN</strong> BÊN TRÊN.
+    </span>
+</div>
+<mat-dialog-actions align="end" style="padding-right: 50px;">
+    <button 
+        mat-button 
+        mat-dialog-close
+        class="cancel-button">Quay lại</button>
+    <div style="padding-right: 50px;"></div>
+    <button 
+        mat-button 
+        [mat-dialog-close]="true"  
+        class="continue-button"
+        [disabled]="!hideRequiredControl.value"
+        [attr.aria-disabled]="!hideRequiredControl.value">
+        <strong style="color: white;">Tiếp tục</strong>
+    </button>
+</mat-dialog-actions>

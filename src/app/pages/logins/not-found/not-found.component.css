@@ -1,22 +1,28 @@
 .not-found {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 30vh;
+    justify-content: center;
+    background-image: url(../../../../assets/img/bg_404.png);
+    background-size: 100% auto; /* Chiều cao ảnh vừa với phần tử, chiều ngang tự động */
+    background-position: center top 32%;
+    background-repeat: no-repeat; /* Không lặp lại hình ảnh */
+}
+.content {
+    width: 1000px;
+    font-size: 2.5rem; /* Kích thước chữ */
+    color: black; /* Màu chữ */
+    text-align: center; /* Căn giữa nội dung chữ */
+    padding: 10px; /* Khoảng cách bên trong */
+    border-radius: 8px; /* Bo tròn góc */
+    font-family: 'Arial', sans-serif;
 }
 .not-found-exit{
-    display: flex;
     justify-content: center;
     align-items: center;
-    height: 0vh;
 }
-.not-found,
-.not-found-exit {
-    margin: 0;
-    font-size: 25px; 
-    font-family: 'Arial', sans-serif;
-}
-.not-found h3{
-    font-size: 30px; 
-    font-family: 'Arial', sans-serif;
-}
+

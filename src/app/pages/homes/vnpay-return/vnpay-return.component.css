@@ -1,0 +1,56 @@
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Sắp xếp theo chiều dọc */
+    align-items: center;
+    justify-content: center;
+    background-image: url(../../../../assets/img/bg_vnpay.webp);
+    transition: opacity 0.75s, visibility 0.75s;
+  }
+  
+  .loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .loading-text {
+    position: relative; /* Để văn bản không bị ảnh hưởng bởi spinner */
+    font-size: 5rem;
+    font-weight: bold;
+    color: #FFC4A3; /* Màu chữ */
+    text-transform: uppercase; /* Viết hoa chữ (tùy chọn) */
+    margin-bottom: 20px; /* Khoảng cách giữa chữ và loader tròn */
+    
+    /* Tạo viền chữ */
+    -webkit-text-stroke: 0.2px #f15e2c; /* Độ dày và màu viền */
+    text-shadow: 
+    0px 0px 10px #111,   /* Trung tâm */
+    2px 2px 10px #111,   /* Phía dưới phải */
+    -2px -2px 10px #111, /* Phía trên trái */
+    -2px 2px 10px #111,  /* Phía dưới trái */
+    2px -2px 10px #111;  /* Phía trên phải */
+  }
+  
+  .spinner {
+    content: "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid #FFC4A3;
+    border-top-color: #f15e2c;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+  }
+  
+  @keyframes loading {
+    from {
+      transform: rotate(0turn);
+    }
+    to {
+      transform: rotate(1turn);
+    }
+  }
+  

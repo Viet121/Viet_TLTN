@@ -54,9 +54,9 @@
                         </div>
                         
                         <div class="col-md-6">
-                            <small *ngIf="addInfor.controls['soNha'].dirty && addInfor.hasError('required','soNha')" class="text-danger2">*Địa chỉchỉ là bắt buộc</small>
+                            <small *ngIf="addInfor.controls['soNha'].dirty && addInfor.hasError('required','soNha')" class="text-danger2">*Địa chỉ là bắt buộc</small>
                             <div class="has-feedback">
-                                <input type="text" class="form-control" id="soNha" formControlName="soNha" placeholder="Nhập tên đường,địa chỉ giao">
+                                <input type="text" class="form-control" id="soNha" formControlName="soNha" placeholder="Nhập tên đường, địa chỉ giao">
                             </div>
                         </div>
                     </div>
@@ -68,11 +68,28 @@
                     </div>
                     <div class="col-lg-12 title-1">PHƯƠNG THỨC THANH TOÁN</div>
                     <div class="col-lg-10 form-group">
-                        <div class="ck1">
-                            Thanh toán trực tiếp khi giao hàng  
-                            &nbsp; &nbsp; 
-                            <img src="../../../../assets/img/icon_COD.svg">
-                        </div>
+                        <section class="example-section">
+                            <div class="ck1">
+                                <mat-checkbox 
+                                    class="example-margin"
+                                    [checked]="addInfor.controls['thanhToan'].value === 0"
+                                    (change)="onCheckboxChange(0)">
+                                </mat-checkbox>
+                                Thanh toán trực tiếp khi giao hàng  
+                                &nbsp; &nbsp; 
+                                <img src="../../../../assets/img/icon_COD.svg">
+                            </div>
+                            <div class="ck1">
+                                <mat-checkbox 
+                                    class="example-margin"
+                                    [checked]="addInfor.controls['thanhToan'].value === 1"
+                                    (change)="onCheckboxChange(1)">
+                                </mat-checkbox>
+                                Thanh toán bằng phương thức VNPAY  
+                                &nbsp; &nbsp; 
+                                <img src="../../../../assets/img/icon_PAY.svg">
+                            </div>
+                        </section>
                     </div>
                 </form>
             </div>
